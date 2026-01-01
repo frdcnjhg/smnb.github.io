@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宋梦宋梦宇宙第一</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000814;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "微软雅黑", sans-serif;
+        }
+        /* 星星背景 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+        /* 滚动祝福语 */
+        .blessing {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-align: center;
+            animation: scroll 15s linear infinite;
+        }
+        .blessing h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 15px #ff6b6b, 0 0 30px #ff6b6b;
+            margin-bottom: 1rem;
+        }
+        .blessing p {
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px #33ccff, 0 0 20px #33ccff;
+        }
+        @keyframes scroll {
+            0% { transform: translateY(50px); opacity: 0; }
+            20% { transform: translateY(0); opacity: 1; }
+            80% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+        /* 底部装饰文字 */
+        .footer-text {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: #99ccff;
+            font-size: 1rem;
+            z-index: 2;
+            text-shadow: 0 0 5px #99ccff;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="fireworks-container" id="fireworks"></div>
+    <div class="blessing">
+        <h1>宋梦小仙女</h1>
+        <p>所愿皆能成</p>
+    </div>
+    <div class="footer-text">岁岁平，岁岁安，岁岁平安</div>
+
+    <script>
+        // 随机数工具函数
+        const random = (min, max) => Math.random() * (max - min) + min;
+        const floorRandom = (min, max) => Math.floor(random(min, max));
+
+        // 星星背景类
+        class Stars {
+            constructor(container) {
+                this.canvas = document.createElement("canvas");
+                this.ctx = this.canvas.getContext("2d");
+                container.appendChild(this.canvas);
+                this.resize();
+                window.addEventListener("resize", () => this.resize());
+                this.stars = [];
+                this.createStars();
+                this.animate();
+            }
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+            createStars() {
+                for (let i = 0; i < 200; i++) {
+                    this.stars.push({
+                        x: random(0, this.canvas.width),
+                        y: random(0, this.canvas.height / 2),
+                        size: random(1, 3),
+                        alpha: random(0.2, 1),
+                        speed: random(0.05, 0.2)
+                    });
+                }
+            }
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.stars.forEach(star => {
+                    star.alpha += star.speed * (Math.random() > 0.5 ? 1 : -1);
+                    star.alpha = Math.max(0.2, Math.min(1, star.alpha));
+                    this.ctx.beginPath();
+                    this.ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                    this.ctx.fill();
+                });
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // 粒子类（新增不同形态）
+        class Particle {
+            constructor(x, y, color, type) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.type = type; // 0:圆形 1:方形
+                this.speed = random(2, 6);
+                this.angle = random(0, Math.PI * 2);
+                this.gravity = 0.03;
+                this.vx = Math.cos(this.angle) * this.speed;
+                this.vy = Math.sin(this.angle) * this.speed;
+                this.alpha = 1;
+                this.decay = random(0.008, 0.015);
+                this.size = random(2, 5);
+            }
+            update() {
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                if (this.type === 0) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillRect(this.x - this.size/2, this.y - this.size/2, this.size, this.size);
+                }
+                ctx.restore();
+            }
+        }
+
+        // 烟花类（提升爆炸高度）
+        class Fireworks {
+            constructor(container) {
+                this.canvas = document.createElement("canvas");
+                this.ctx = this.canvas.getContext("2d");
+                container.appendChild(this.canvas);
+                this.resize();
+                window.addEventListener("resize", () => this.resize());
+                this.particles = [];
+                // 丰富色彩
+                this.colors = ["#ff3366", "#33ccff", "#ffff33", "#ff9933", "#9933ff", "#ff66cc", "#66ff66"];
+                // 自动发射
+                setInterval(() => this.launch(), 1200);
+                this.animate();
+            }
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+            launch() {
+                const x = random(0, this.canvas.width);
+                // 提升爆炸高度（屏幕上方1/3区域）
+                const y = random(this.canvas.height / 4, this.canvas.height / 2.5);
+                const color = this.colors[floorRandom(0, this.colors.length)];
+                // 生成不同形态粒子
+                for (let i = 0; i < 150; i++) {
+                    const type = floorRandom(0, 2);
+                    this.particles.push(new Particle(x, y, color, type));
+                }
+            }
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                for (let i = this.particles.length - 1; i >= 0; i--) {
+                    const p = this.particles[i];
+                    p.update();
+                    p.draw(this.ctx);
+                    if (p.alpha <= 0) {
+                        this.particles.splice(i, 1);
+                    }
+                }
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // 启动效果
+        window.onload = () => {
+            new Stars(document.getElementById("stars"));
+            new Fireworks(document.getElementById("fireworks"));
+        };
+    </script>
+</body>
+</html>
