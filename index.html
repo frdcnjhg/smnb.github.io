@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<title>宋梦宋梦宇宙第一</title>
+alert('今天也要记得开心哦!')
+<html lang="zh‑CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #87CEEB 0%, #b0e0ff 100%);
+            min-height: 100vh;
+            font-family: "PingFang SC", system-ui, sans-serif;
+        }
+        #home-page {
+            padding: 60px 20px;
+        }
+        .title {
+            text-align: center;
+            font-size: 36px;
+            color: #2c4b82;
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+        .module-container {
+            max-width: 700px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 24px;
+        }
+        .module-card {
+            background: rgba(255,255,255,0.85);
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 22px;
+            color:#334160;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .module-card:hover{
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+            background: #ffffff;
+        }
+        .module-card.empty{
+            opacity:0.6;
+            cursor: default;
+        }
+        .module-card.empty:hover{
+            transform:none;
+            box-shadow:0 8px 20px rgba(0,0,0,0.12);
+        }
+    </style>
+</head>
+<body>
+    <div id="home-page">
+        <div class="title">✨小工具合集✨</div>
+        <div class="module-container">
+            <div class="module-card" onclick="location.href='wheel.html'">
+                🥘今天吃什么
+            </div>
+            <div class="module-card empty">
+                待开发模块2
+            </div>
+            <div class="module-card empty">
+                待开发模块3
+            </div>
+            <div class="module-card empty">
+                待开发模块4
+            </div>
+        </div>
+    </div>
+</body>
+</html>
