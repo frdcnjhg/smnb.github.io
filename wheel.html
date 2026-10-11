@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<title>宋梦宋梦宇宙第一</title>
+<html lang="zh‑CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <script src="https://unpkg.com/lucky-canvas@1.7.25"></script>
+    </script>
+    <style>
+    body {
+    background-color: skyblue
+    }
+   #my-lucky {
+    margin: 100px auto;
+    width: 300px;
+    height: 300px;
+}
+  
+        .back-btn{
+            display:block;
+            margin:30px auto 0;
+            padding:12px 32px;
+            border:none;
+            border-radius:12px;
+            background:#617df2;
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="my-lucky"></div>
+    <button class="back-btn" onclick="location.href='index.html'">返回首页</button>
+
+<script>
+if(!window.LuckyCanvas){
+    alert("库加载失败！请用系统浏览器打开，不要微信内置浏览器");
+}
+
+const myLucky = new LuckyCanvas.LuckyWheel('#my-lucky', {
+    blocks: [{ padding: '10px', background: '#99e2b8' }],
+    prizes: [
+      { background: '#ffe6f2', fonts: [{ text: '螺蛳粉',fontSize:'16px' }],range: 1 },
+      { background: '#ffd6e8', fonts: [{ text: '土豆粉',fontSize:'16px' }],range: 1 },
+      { background: '#ffe6f2', fonts: [{ text: '凉拌菜',fontSize:'16px' }],range: 1 },
+      { background: '#ffd6e8', fonts: [{ text: '卤菜',fontSize:'16px' }],range: 1 },
+      { background: '#ffe6f2', fonts: [{ text: '新疆炒米粉',fontSize:'16px' }],range: 1 },
+      { background: '#ffd6e8', fonts: [{ text: '麻辣烫',fontSize:'16px' }],range: 1 },
+      { background: '#ffe6f2', fonts: [{ text: '云南米线',fontSize:'16px' }],range: 1 },
+      { background: '#ffd6e8', fonts: [{ text: '塔斯汀',fontSize:'16px' }],range: 1 },
+      { background: '#ffe6f2', fonts: [{ text: '福鼎肉片',fontSize:'16px' }],range: 1 },
+      { background: '#ffd6e8', fonts: [{ text: '不吃',fontSize:'16px' }],range: 1 },
+    ],
+    buttons: [
+      { radius: '48%', background: '#ff7cb3' },
+      { radius: '35%', background: '#ffb8d2' },
+      { radius: '20%', background: '#ff5799', pointer:true,fonts:[{text:'开始'}] }
+    ],
+    start: function() {
+        myLucky.play()
+        setTimeout(_ => {
+            myLucky.stop()
+        },2500)
+    },
+    end: function(prize) {
+        alert('今天吃：' + prize.fonts[0].text )
+    }
+})
+</script>
+</body>
+</html>
