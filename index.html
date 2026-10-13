@@ -1,85 +1,71 @@
 <!DOCTYPE html>
-<title>宋梦宋梦宇宙第一</title>
 <html lang="zh‑CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-   
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: linear-gradient(135deg, #87CEEB 0%, #b0e0ff 100%);
-            min-height: 100vh;
-            font-family: "PingFang SC", system-ui, sans-serif;
-        }
-        #home-page {
-            padding: 60px 20px;
-        }
-        .title {
-            text-align: center;
-            font-size: 36px;
-            color: #2c4b82;
-            margin-bottom: 50px;
-            font-weight: bold;
-        }
-        .module-container {
-            max-width: 700px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-            gap: 24px;
-        }
-        .module-card {
-            background: rgba(255,255,255,0.85);
-            padding: 40px 20px;
-            border-radius: 20px;
-            text-align: center;
-            font-size: 22px;
-            color:#334160;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-        .module-card:hover{
-            transform: translateY(-6px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-            background: #ffffff;
-        }
-        .module-card.empty{
-            opacity:0.6;
-            cursor: default;
-        }
-        .module-card.empty:hover{
-            transform:none;
-            box-shadow:0 8px 20px rgba(0,0,0,0.12);
-        }
-
-    </style>
+<meta charset="UTF‑8">
+<meta name="viewport" content="width=device‑width, initial‑scale=1.0">
+<title>恋柱分镜跳转</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    background:#fce4ec;
+    min-height:100vh;
+    padding:20px 12px;
+}
+.wrapper{
+    max-width:480px;
+    margin:0 auto;
+    background:url("bg.png");
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    aspect-ratio: 960 / 2084;
+    position:relative;
+}
+/* 四个透明区域 */
+.box‑1{
+    position:absolute;
+    top:12%;
+    left:4%;
+    width:92%;
+    height:34%;
+}
+.box‑2{
+    position:absolute;
+    top:48%;
+    left:4%;
+    width:52%;
+    height:26%;
+}
+.box‑3{
+    position:absolute;
+    top:74%;
+    left:4%;
+    width:42%;
+    height:24%;
+}
+.box‑4{
+    position:absolute;
+    top:52%;
+    left:56%;
+    width:40%;
+    height:46%;
+}
+a{
+    display:block;
+    width:100%;
+    height:100%;
+}
+</style>
 </head>
-     <script>
-    alert('今天也要记得开心哦!')
-        </script>    
 <body>
-    <div id="home-page">
-        <div class="title">✨神的专属工具✨</div>
-        <div class="module-container">
-            <div class="module-card" onclick="location.href='wheel.html'">
-                🥘今天吃什么
-            </div>
-            <div class="module-card empty">
-                待王开发
-            </div>
-            <div class="module-card empty">
-                待王开发
-            </div>
-            <div class="module-card empty">
-                待王开发
-            </div>
-        </div>
+<div class="wrapper">
+    <!-- 第一个：可以点击，跳转到转盘 -->
+    <div class="box‑1">
+        <a href="wheel.html"></a>
     </div>
+    <!-- 下面3个只保留div，没有a标签，完全点不动 -->
+    <div class="box‑2"></div>
+    <div class="box‑3"></div>
+    <div class="box‑4"></div>
+</div>
 </body>
 </html>
