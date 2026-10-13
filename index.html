@@ -1,49 +1,47 @@
 <!DOCTYPE html>
-<html lang="zh‑CN">
+<html lang="zh-CN">
 <head>
-<meta charset="UTF‑8">
-<meta name="viewport" content="width=device‑width, initial‑scale=1.0">
-<title>恋柱分镜跳转</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恋柱分镜首页</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-    background:#fce4ec;
+    background:#f8c8dc;
     min-height:100vh;
-    padding:20px 12px;
 }
 .wrapper{
-    max-width:480px;
-    margin:0 auto;
+    width:100vw;
+    position:relative;
+    /* 原图比例 宽960，高2092 */
+    aspect-ratio: 960 / 2092;
     background:url("bg.png");
     background-size:100% 100%;
     background-repeat:no-repeat;
-    aspect-ratio: 960 / 2084;
-    position:relative;
 }
-    alert("今天也要记得开心哦！");
-/* 四个透明区域 */
-.box‑1{
+/* 热区，百分比会跟随wrapper自动缩放 */
+.box-1{
     position:absolute;
     top:12%;
     left:4%;
     width:92%;
     height:34%;
 }
-.box‑2{
+.box-2{
     position:absolute;
     top:48%;
     left:4%;
     width:52%;
     height:26%;
 }
-.box‑3{
+.box-3{
     position:absolute;
     top:74%;
     left:4%;
     width:42%;
     height:24%;
 }
-.box‑4{
+.box-4{
     position:absolute;
     top:52%;
     left:56%;
@@ -54,19 +52,21 @@ a{
     display:block;
     width:100%;
     height:100%;
+    /* 加半透明红色，调试的时候打开看点击区域，上线后删掉 */
+    /* background:rgba(255,0,0,0.2); */
 }
 </style>
 </head>
 <body>
 <div class="wrapper">
-    <!-- 第一个：可以点击，跳转到转盘 -->
-    <div class="box‑1">
+    <!-- 第一个框可点击，跳转到转盘wheel.html -->
+    <div class="box-1">
         <a href="wheel.html"></a>
     </div>
-    <!-- 下面3个只保留div，没有a标签，完全点不动 -->
-    <div class="box‑2"></div>
-    <div class="box‑3"></div>
-    <div class="box‑4"></div>
+    <!-- 剩下三个无链接，点不动 -->
+    <div class="box-2"></div>
+    <div class="box-3"></div>
+    <div class="box-4"></div>
 </div>
 </body>
 </html>
